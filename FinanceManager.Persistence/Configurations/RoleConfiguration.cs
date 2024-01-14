@@ -33,19 +33,19 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
 			}
 		);
 
-		builder.HasKey(c => c.Id);
-		builder.Property(c => c.Id).ValueGeneratedOnAdd();
+		builder.HasKey(r => r.Id);
+		builder.Property(r => r.Id).ValueGeneratedOnAdd();
 
-		builder.Property(c => c.CreatedAt)
+		builder.Property(r => r.CreatedAt)
 			.IsRequired();
 
-		builder.Property(c => c.ModifiedAt)
+		builder.Property(r => r.ModifiedAt)
 			.IsRequired();
 
-		builder.Property(c => c.Name)
+		builder.Property(r => r.Name)
 			.IsRequired()
 			.HasMaxLength(50);
-		builder.HasIndex(c => c.Name)
+		builder.HasIndex(r => r.Name)
 			.IsUnique();
 	}
 }

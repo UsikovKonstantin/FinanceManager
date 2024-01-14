@@ -26,16 +26,16 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 			}
 		);
 
-		builder.HasKey(c => c.Id);
-		builder.Property(c => c.Id).ValueGeneratedOnAdd();
+		builder.HasKey(t => t.Id);
+		builder.Property(t => t.Id).ValueGeneratedOnAdd();
 
-		builder.Property(c => c.CreatedAt)
+		builder.Property(t => t.CreatedAt)
 			.IsRequired();
 
-		builder.Property(c => c.ModifiedAt)
+		builder.Property(t => t.ModifiedAt)
 			.IsRequired();
 
-		builder.Property(c => c.Name)
+		builder.Property(t => t.Name)
 			.IsRequired()
 			.HasMaxLength(50);
 	}

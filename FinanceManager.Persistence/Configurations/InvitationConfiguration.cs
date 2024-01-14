@@ -12,6 +12,7 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 		builder.HasData(
 			new Invitation
 			{
+				Id = 1,
 				UserFromId = 4,
 				UserToId = 1,
 				CreatedAt = now,
@@ -19,6 +20,7 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 			},
 			new Invitation
 			{
+				Id = 2,
 				UserFromId = 4,
 				UserToId = 2,
 				CreatedAt = now,
@@ -26,6 +28,7 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 			},
 			new Invitation
 			{
+				Id = 3,
 				UserFromId = 1,
 				UserToId = 4,
 				CreatedAt = now,
@@ -33,9 +36,8 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 			}
 		);
 
-		builder.Ignore(i => i.Id);
-
-		builder.HasKey(i => new { i.UserFromId, i.UserToId });
+		builder.HasKey(i => i.Id);
+		builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
 		builder.Property(i => i.CreatedAt)
 			.IsRequired();
@@ -52,6 +54,9 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 			.WithMany(u => u.InvitationsTo)
 			.HasForeignKey(i => i.UserToId)
 			.OnDelete(DeleteBehavior.Restrict);
+
+		builder.HasIndex(i => new { i.UserFromId, i.UserToId })
+			.IsUnique();
 
 		builder.ToTable(table => table.HasCheckConstraint("CK_Invitation_NotEqual", "[UserFromId] <> [UserToId]"));
 	}
