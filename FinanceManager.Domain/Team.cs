@@ -1,6 +1,6 @@
 ﻿namespace FinanceManager.Domain;
 
-public class Group : BaseEntity
+public class Team : BaseEntity
 {
 	public string Name { get; set; } = string.Empty;
 
