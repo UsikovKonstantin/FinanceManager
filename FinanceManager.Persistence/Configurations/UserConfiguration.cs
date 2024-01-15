@@ -109,9 +109,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
 		builder.Property(u => u.Gender)
 			.IsRequired()
-			.IsFixedLength()
-			.HasMaxLength(1)
-			.HasConversion<char>();
+			.HasColumnType("char(1)");
 		builder.ToTable(table => table.HasCheckConstraint("CK_User_Gender", "[Gender] IN ('M', 'F')"));
 
 		builder.Property(u => u.Email)
