@@ -1,9 +1,11 @@
+using FinanceManager.Application;
 using FinanceManager.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers();
