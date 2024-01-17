@@ -10,7 +10,8 @@ public class User : BaseEntity
 	public char Gender { get; set; }
 	public string Email { get; set; } = string.Empty;
 	public bool EmailConfirmed { get; set; }
-    public string Password { get; set; } = string.Empty;
+	public bool IsRegistered { get; set; }
+	public string Password { get; set; } = string.Empty;
 	public string? AccessToken { get; set; }
 	public DateTime? AccessTokenExpirationDate { get; set; }
 	public string? RefreshToken { get; set; }

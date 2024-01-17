@@ -22,7 +22,7 @@ public class TokenService : ITokenService
 		_roleRepository = roleRepository;
 	}
 
-	public async Task<string> GenerateAccessTokenAsync(User user)
+	public async Task<JwtSecurityToken> GenerateAccessTokenAsync(User user)
 	{
 		IEnumerable<string> roles = await _roleRepository.GetRolesByUserIdAsync(user.Id);
 
@@ -48,7 +48,7 @@ public class TokenService : ITokenService
 			expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DurationInMinutes),
 			signingCredentials: signinCredentials);
 
-		return new JwtSecurityTokenHandler().WriteToken(token);
+		return token;
 	}
 
 	public string GenerateRefreshToken()
