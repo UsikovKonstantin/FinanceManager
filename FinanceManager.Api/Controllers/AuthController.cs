@@ -1,4 +1,6 @@
-﻿using FinanceManager.Application.Features.Users.Commands.RegisterUser;
+﻿using FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
+using FinanceManager.Application.Features.Users.Commands.Login;
+using FinanceManager.Application.Features.Users.Commands.RegisterUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +22,20 @@ public class AuthController : Controller
 	{
 		int id = await _mediator.Send(command);
 		return Ok(new { id = id });
+	}
+
+	[HttpGet("confirmRegistration")]
+	public async Task<ActionResult> ConfirmRegistration(string token)
+	{
+		ConfirmRegistrationCommand command = new ConfirmRegistrationCommand { Token = token };
+		await _mediator.Send(command);
+		return NoContent();
+	}
+
+	[HttpPost("login")]
+	public async Task<ActionResult<LoginResponse>> Login(LoginCommand command)
+	{
+		LoginResponse response = await _mediator.Send(command);
+		return Ok(response);
 	}
 }
