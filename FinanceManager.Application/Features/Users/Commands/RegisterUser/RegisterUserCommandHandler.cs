@@ -37,11 +37,11 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, i
 		if (foundUser != null && !foundUser.IsRegistered && foundUser.AccessTokenExpirationDate < DateTime.UtcNow)
 		{
 			Team? foundTeam = await _teamRepository.GetByIdAsync(foundUser.TeamId);
+			await _userRepository.DeleteAsync(foundUser);
 			if (foundTeam != null)
 			{
 				await _teamRepository.DeleteAsync(foundTeam);
 			}
-			await _userRepository.DeleteAsync(foundUser);
 		}
 
 		// Проверить входящие данные
