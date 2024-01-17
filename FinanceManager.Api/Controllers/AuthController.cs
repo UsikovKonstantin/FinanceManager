@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
 using FinanceManager.Application.Features.Users.Commands.Login;
+using FinanceManager.Application.Features.Users.Commands.Refresh;
 using FinanceManager.Application.Features.Users.Commands.RegisterUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,13 @@ public class AuthController : Controller
 	public async Task<ActionResult<LoginResponse>> Login(LoginCommand command)
 	{
 		LoginResponse response = await _mediator.Send(command);
+		return Ok(response);
+	}
+
+	[HttpPost("refresh")]
+	public async Task<ActionResult<RefreshResponse>> Refresh(RefreshCommand command)
+	{
+		RefreshResponse response = await _mediator.Send(command);
 		return Ok(response);
 	}
 }
