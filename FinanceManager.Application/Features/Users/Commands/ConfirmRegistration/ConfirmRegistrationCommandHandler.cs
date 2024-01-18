@@ -10,22 +10,16 @@ namespace FinanceManager.Application.Features.Users.Commands.ConfirmRegistration
 public class ConfirmRegistrationCommandHandler : IRequestHandler<ConfirmRegistrationCommand, Unit>
 {
 	private readonly IUserRepository _userRepository;
-	private readonly IAppLogger<ConfirmRegistrationCommandHandler> _logger;
 
-	public ConfirmRegistrationCommandHandler(IUserRepository userRepository,
-		IAppLogger<ConfirmRegistrationCommandHandler> logger)
+	public ConfirmRegistrationCommandHandler(IUserRepository userRepository)
 	{
 		_userRepository = userRepository;
-		_logger = logger;
 	}
 
 	public async Task<Unit> Handle(ConfirmRegistrationCommand request, CancellationToken cancellationToken)
 	{
 		if (request.RegistrationToken == "")
 			throw new BadRequestException("RegistrationToken is required");
-
-		_logger.LogInformation(request.RegistrationToken);
-		_logger.LogInformation(HttpUtility.UrlDecode(request.RegistrationToken));
 
 		User? user = await _userRepository.FirstOrDefaultAsync(u => u.RegistrationToken == request.RegistrationToken);
 		if (user == null)

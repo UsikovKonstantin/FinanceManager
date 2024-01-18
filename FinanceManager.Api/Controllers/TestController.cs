@@ -4,12 +4,14 @@ using FinanceManager.Application.Contracts.Logging;
 using FinanceManager.Application.Contracts.Persistence;
 using FinanceManager.Application.Models.Email;
 using FinanceManager.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.Api.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
+	[Authorize]
 	public class TestController : ControllerBase
 	{
 		private readonly IUserRepository _userRepository;
@@ -28,6 +30,8 @@ namespace FinanceManager.Api.Controllers
 		[HttpGet()]
 		public async Task<IEnumerable<User>> Get()
 		{
+			_logger.LogInformation(HttpContext?.User?.FindFirst("uid").Value.ToString());
+
 			string token = _tokenService.GenerateRandomToken();
 
 			_logger.LogInformation("Logging something...");

@@ -1,7 +1,9 @@
 ﻿using FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
+using FinanceManager.Application.Features.Users.Commands.ForgotPassword;
 using FinanceManager.Application.Features.Users.Commands.Login;
 using FinanceManager.Application.Features.Users.Commands.Refresh;
 using FinanceManager.Application.Features.Users.Commands.RegisterUser;
+using FinanceManager.Application.Features.Users.Commands.ResetPassword;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,5 +47,19 @@ public class AuthController : Controller
 	{
 		RefreshResponse response = await _mediator.Send(command);
 		return Ok(response);
+	}
+
+	[HttpPost("forgotPassword")]
+	public async Task<ActionResult> ForgotPassword(ForgotPasswordCommand command)
+	{
+		await _mediator.Send(command);
+		return NoContent();
+	}
+
+	[HttpPost("resetPassword")]
+	public async Task<ActionResult> ForgotPassword(ResetPasswordCommand command)
+	{
+		await _mediator.Send(command);
+		return NoContent();
 	}
 }
