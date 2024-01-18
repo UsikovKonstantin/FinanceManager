@@ -28,7 +28,7 @@ public class AuthController : Controller
 	[HttpGet("confirmRegistration")]
 	public async Task<ActionResult> ConfirmRegistration(string token)
 	{
-		ConfirmRegistrationCommand command = new ConfirmRegistrationCommand { Token = token };
+		ConfirmRegistrationCommand command = new ConfirmRegistrationCommand { RegistrationToken = token };
 		await _mediator.Send(command);
 		return NoContent();
 	}

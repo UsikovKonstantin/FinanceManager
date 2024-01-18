@@ -11,7 +11,7 @@ public class LoginCommandValidator : AbstractValidator<LoginCommand>
 			.MaximumLength(50).WithMessage("{PropertyName} must be fewer than {MaxLength} characters")
 			.EmailAddress().WithMessage("{PropertyName} is not valid");
 
-		RuleFor(u => u.Password)
+		RuleFor(l => l.Password)
 			.NotEmpty().WithMessage("{PropertyName} is required")
 			.MinimumLength(6).WithMessage("{PropertyName} must be more than {MinLength} characters")
 			.MaximumLength(150).WithMessage("{PropertyName} must be fewer than {MaxLength} characters");

@@ -1,8 +1,6 @@
 ﻿using FinanceManager.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Diagnostics.Contracts;
-using System.Reflection.Emit;
 
 namespace FinanceManager.Persistence.Configurations;
 
@@ -16,15 +14,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			{
 				Id = 1,
 				TeamId = 1,
-				UserName = "Konstantin",
+				UserName = "Konstantin1",
 				FirstName = "Константин",
 				LastName = "Усиков",
 				Balance = 10000,
-				Gender = 'M',
+				Gender = "M",
 				Email = "usikov_konstantin@mail.ru",
-				EmailConfirmed = true,
+				Password = "46BDA4F3691DF3493E8931985FB2073986231F597BD8D1841FFE919CA670EB06:D7A6746090E449C64C85B60FADAE5D2F:50000:SHA256",
 				IsRegistered = true,
-				Password = "03D1F6545E6426DDEC4797280867E2F14593E0FB38DD6BF190773139DCE58D92:E1C74E1AEB5D8308D160474C6E2C274E:50000:SHA256",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -32,15 +29,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			{
 				Id = 2,
 				TeamId = 1,
-				UserName = "Dmitry",
+				UserName = "Dmitry1",
 				FirstName = "Дмитрий",
 				LastName = "Орлов",
 				Balance = 20000,
-				Gender = 'M',
+				Gender = "M",
 				Email = "orlov_dmitry@yandex.ru",
-				EmailConfirmed = true,
+				Password = "F77753025D17913EE058E04AC3A62373A4F8564FCEE7C5DC4AD3F1A419238B4E:6641B1A3A8BADF1A30F307179A9A5C0A:50000:SHA256",
 				IsRegistered = true,
-				Password = "41998DC78F605A001090203007F3F7341D46BE392229F82263C753B712BB57D5:2365F9A998AE23EBC65EAB8BAD005458:50000:SHA256",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -48,15 +44,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			{
 				Id = 3,
 				TeamId = 1,
-				UserName = "Artyom",
+				UserName = "Artyom1",
 				FirstName = "Артем",
 				LastName = "Иванов",
 				Balance = 30000,
-				Gender = 'M',
+				Gender = "M",
 				Email = "ivanov_artyom@gmail.com",
-				EmailConfirmed = true,
+				Password = "39E7BE9C0432F76FF7E239D3C8C9313270BF2CDC1D5EBDA0474C241F52387CC8:368AEC1394165D87754905CECD02A369:50000:SHA256",
 				IsRegistered = true,
-				Password = "AC74B05E1B544764C0E33E0D4574A5E29C629AF5D22394B7308789DE59F054F3:9FD58EBE4CB968212D9F0117466A77CC:50000:SHA256",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -64,15 +59,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			{
 				Id = 4,
 				TeamId = 2,
-				UserName = "Maria",
+				UserName = "Maria1",
 				FirstName = "Мария",
 				LastName = "Смирнова",
 				Balance = 40000,
-				Gender = 'F',
+				Gender = "F",
 				Email = "smirnova_maria@mail.ru",
-				EmailConfirmed = true,
+				Password = "593652F3B10EE726A804C7B74C8C5A5A9E0C7F1E4E135BF1414E92CA5EE6EEFC:FE38DEBEE0E9CC245B5BE4BBC4A0918C:50000:SHA256",
 				IsRegistered = true,
-				Password = "D9507B7FD5AF9880B37D6926354AB29CA7B313891BE5A3E9B851A4BF6E32BDCD:0E08FF50E2205404163CE192B957FA60:50000:SHA256",
 				CreatedAt = now,
 				ModifiedAt = now
 			}
@@ -107,13 +101,13 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			.HasMaxLength(50);
 
 		builder.Property(u => u.Balance)
-			.HasColumnType("decimal(10,2)")
-			.IsRequired();
+			.IsRequired()
+			.HasColumnType("decimal(10,2)");
 		builder.ToTable(table => table.HasCheckConstraint("CK_User_Balance", "[Balance] >= 0 AND [Balance] < 100000000"));
 
 		builder.Property(u => u.Gender)
 			.IsRequired()
-			.HasColumnType("char(1)");
+			.HasMaxLength(1);
 		builder.ToTable(table => table.HasCheckConstraint("CK_User_Gender", "[Gender] IN ('M', 'F')"));
 
 		builder.Property(u => u.Email)
@@ -123,14 +117,26 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			.IsUnique();
 		builder.ToTable(table => table.HasCheckConstraint("CK_User_EmailFormat", "PATINDEX('%_@_%', [Email]) > 0"));
 
-		builder.Property(u => u.EmailConfirmed)
+		builder.Property(u => u.Password)
 			.IsRequired();
 
 		builder.Property(u => u.IsRegistered)
 			.IsRequired();
 
-		builder.Property(u => u.Password)
-			.IsRequired()
-			.HasMaxLength(150);
+		builder.Property(u => u.RegistrationToken)
+			.HasMaxLength(100);
+
+		builder.Property(u => u.ResetPasswordToken)
+			.HasMaxLength(100);
+
+		builder.Property(u => u.ChangeEmailToken)
+			.HasMaxLength(100);
+
+		builder.Property(u => u.RefreshToken)
+			.HasMaxLength(100);
+
+		builder.Property(u => u.NewEmail)
+			.HasMaxLength(50);
+		builder.ToTable(table => table.HasCheckConstraint("CK_User_NewEmailFormat", "PATINDEX('%_@_%', [NewEmail]) > 0"));
 	}
 }

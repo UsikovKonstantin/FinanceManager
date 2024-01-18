@@ -31,13 +31,13 @@ public static class ApplicationServiceRegistration
 			opts.TokenValidationParameters = new TokenValidationParameters
 			{
 				ValidateIssuer = true,
-				ValidateIssuerSigningKey = true,
 				ValidateAudience = true,
+				ValidateIssuerSigningKey = true,
 				ValidateLifetime = true,
-				ClockSkew = TimeSpan.Zero,
 				ValidIssuer = configuration["JwtSettings:Issuer"],
 				ValidAudience = configuration["JwtSettings:Audience"],
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"] ?? "")),
+				ClockSkew = TimeSpan.Zero
 			};
 		});
 

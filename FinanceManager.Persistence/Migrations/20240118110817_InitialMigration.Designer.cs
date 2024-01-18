@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceManager.Persistence.Migrations
 {
     [DbContext(typeof(FinanceManagerDatabaseContext))]
-    [Migration("20240117081526_EmailFormatMigration")]
-    partial class EmailFormatMigration
+    [Migration("20240118110817_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,200 +62,200 @@ namespace FinanceManager.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Заработная плата",
                             Type = "I"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Премия",
                             Type = "I"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Пенсия",
                             Type = "I"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Продуктовый магазин",
                             Type = "E"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Хозтовары",
                             Type = "E"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Подписка на музыкальный сервис",
                             Type = "E"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Магазин электроники",
                             Type = "E"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Магазин сантехники",
                             Type = "E"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Кафе/Ресторан",
                             Type = "E"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Услуги ЖКХ",
                             Type = "E"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Бензин",
                             Type = "E"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Общественный транспорт",
                             Type = "E"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Такси",
                             Type = "E"
                         },
                         new
                         {
                             Id = 14,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Посещение врача",
                             Type = "E"
                         },
                         new
                         {
                             Id = 15,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Лекарства",
                             Type = "E"
                         },
                         new
                         {
                             Id = 16,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Одежда",
                             Type = "E"
                         },
                         new
                         {
                             Id = 17,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Учебное заведение",
                             Type = "E"
                         },
                         new
                         {
                             Id = 18,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Образование(книги/курсы/т.п.)",
                             Type = "E"
                         },
                         new
                         {
                             Id = 19,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Развлечение(кино/концерты/т.п.)",
                             Type = "E"
                         },
                         new
                         {
                             Id = 20,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Личные расходы",
                             Type = "E"
                         },
                         new
                         {
                             Id = 21,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Хобби",
                             Type = "E"
                         },
                         new
                         {
                             Id = 22,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Красота и уход за собой",
                             Type = "E"
                         },
                         new
                         {
                             Id = 23,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Проценты по кредитам",
                             Type = "E"
                         },
                         new
                         {
                             Id = 24,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Подарки",
                             Type = "B"
                         },
                         new
                         {
                             Id = 25,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980),
                             Name = "Другое",
                             Type = "B"
                         });
@@ -308,10 +308,10 @@ namespace FinanceManager.Persistence.Migrations
                             Id = 1,
                             Amount = 10000m,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             Description = "Описание 1",
-                            DoneAt = new DateTime(2024, 1, 12, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            DoneAt = new DateTime(2024, 1, 13, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             UserId = 1
                         },
                         new
@@ -319,10 +319,10 @@ namespace FinanceManager.Persistence.Migrations
                             Id = 2,
                             Amount = 5000m,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             Description = "Описание 2",
-                            DoneAt = new DateTime(2024, 1, 7, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            DoneAt = new DateTime(2024, 1, 8, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             UserId = 1
                         },
                         new
@@ -330,10 +330,10 @@ namespace FinanceManager.Persistence.Migrations
                             Id = 3,
                             Amount = -1000m,
                             CategoryId = 12,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             Description = "Описание 3",
-                            DoneAt = new DateTime(2024, 1, 2, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            DoneAt = new DateTime(2024, 1, 3, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             UserId = 2
                         },
                         new
@@ -341,10 +341,10 @@ namespace FinanceManager.Persistence.Migrations
                             Id = 4,
                             Amount = -800m,
                             CategoryId = 13,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             Description = "Описание 4",
-                            DoneAt = new DateTime(2023, 12, 28, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 5, DateTimeKind.Utc).AddTicks(5740),
+                            DoneAt = new DateTime(2023, 12, 29, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909),
                             UserId = 4
                         });
                 });
@@ -385,24 +385,24 @@ namespace FinanceManager.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 6, DateTimeKind.Utc).AddTicks(3352),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 6, DateTimeKind.Utc).AddTicks(3352),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952),
                             UserFromId = 4,
                             UserToId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 6, DateTimeKind.Utc).AddTicks(3352),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 6, DateTimeKind.Utc).AddTicks(3352),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952),
                             UserFromId = 4,
                             UserToId = 2
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 6, DateTimeKind.Utc).AddTicks(3352),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 6, DateTimeKind.Utc).AddTicks(3352),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952),
                             UserFromId = 1,
                             UserToId = 4
                         });
@@ -438,22 +438,22 @@ namespace FinanceManager.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(3679),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(3679),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410),
                             Name = "TeamMember"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(3679),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(3679),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410),
                             Name = "TeamLeader"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(3679),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(3679),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410),
                             Name = "Admin"
                         });
                 });
@@ -485,15 +485,15 @@ namespace FinanceManager.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(6732),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(6732),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389),
                             Name = "Группа 1"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(6732),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(6732),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389),
                             Name = "Группа 2"
                         });
                 });
@@ -506,15 +506,15 @@ namespace FinanceManager.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AccessToken")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("AccessTokenExpirationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("ChangeEmailToken")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ChangeEmailTokenExpirationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -524,9 +524,6 @@ namespace FinanceManager.Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -534,7 +531,8 @@ namespace FinanceManager.Persistence.Migrations
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasColumnType("char(1)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<bool>("IsRegistered")
                         .HasColumnType("bit");
@@ -547,16 +545,33 @@ namespace FinanceManager.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("NewEmail")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RefreshToken")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("RefreshTokenExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RegistrationToken")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("RegistrationTokenExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResetPasswordToken")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ResetPasswordTokenExpirationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("TeamId")
@@ -584,6 +599,8 @@ namespace FinanceManager.Persistence.Migrations
                             t.HasCheckConstraint("CK_User_EmailFormat", "PATINDEX('%_@_%', [Email]) > 0");
 
                             t.HasCheckConstraint("CK_User_Gender", "[Gender] IN ('M', 'F')");
+
+                            t.HasCheckConstraint("CK_User_NewEmailFormat", "PATINDEX('%_@_%', [NewEmail]) > 0");
                         });
 
                     b.HasData(
@@ -591,65 +608,61 @@ namespace FinanceManager.Persistence.Migrations
                         {
                             Id = 1,
                             Balance = 10000m,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
                             Email = "usikov_konstantin@mail.ru",
-                            EmailConfirmed = true,
                             FirstName = "Константин",
                             Gender = "M",
                             IsRegistered = true,
                             LastName = "Усиков",
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
-                            Password = "03D1F6545E6426DDEC4797280867E2F14593E0FB38DD6BF190773139DCE58D92:E1C74E1AEB5D8308D160474C6E2C274E:50000:SHA256",
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
+                            Password = "46BDA4F3691DF3493E8931985FB2073986231F597BD8D1841FFE919CA670EB06:D7A6746090E449C64C85B60FADAE5D2F:50000:SHA256",
                             TeamId = 1,
-                            UserName = "Konstantin"
+                            UserName = "Konstantin1"
                         },
                         new
                         {
                             Id = 2,
                             Balance = 20000m,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
                             Email = "orlov_dmitry@yandex.ru",
-                            EmailConfirmed = true,
                             FirstName = "Дмитрий",
                             Gender = "M",
                             IsRegistered = true,
                             LastName = "Орлов",
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
-                            Password = "41998DC78F605A001090203007F3F7341D46BE392229F82263C753B712BB57D5:2365F9A998AE23EBC65EAB8BAD005458:50000:SHA256",
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
+                            Password = "F77753025D17913EE058E04AC3A62373A4F8564FCEE7C5DC4AD3F1A419238B4E:6641B1A3A8BADF1A30F307179A9A5C0A:50000:SHA256",
                             TeamId = 1,
-                            UserName = "Dmitry"
+                            UserName = "Dmitry1"
                         },
                         new
                         {
                             Id = 3,
                             Balance = 30000m,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
                             Email = "ivanov_artyom@gmail.com",
-                            EmailConfirmed = true,
                             FirstName = "Артем",
                             Gender = "M",
                             IsRegistered = true,
                             LastName = "Иванов",
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
-                            Password = "AC74B05E1B544764C0E33E0D4574A5E29C629AF5D22394B7308789DE59F054F3:9FD58EBE4CB968212D9F0117466A77CC:50000:SHA256",
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
+                            Password = "39E7BE9C0432F76FF7E239D3C8C9313270BF2CDC1D5EBDA0474C241F52387CC8:368AEC1394165D87754905CECD02A369:50000:SHA256",
                             TeamId = 1,
-                            UserName = "Artyom"
+                            UserName = "Artyom1"
                         },
                         new
                         {
                             Id = 4,
                             Balance = 40000m,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
                             Email = "smirnova_maria@mail.ru",
-                            EmailConfirmed = true,
                             FirstName = "Мария",
                             Gender = "F",
                             IsRegistered = true,
                             LastName = "Смирнова",
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 10, DateTimeKind.Utc).AddTicks(9026),
-                            Password = "D9507B7FD5AF9880B37D6926354AB29CA7B313891BE5A3E9B851A4BF6E32BDCD:0E08FF50E2205404163CE192B957FA60:50000:SHA256",
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552),
+                            Password = "593652F3B10EE726A804C7B74C8C5A5A9E0C7F1E4E135BF1414E92CA5EE6EEFC:FE38DEBEE0E9CC245B5BE4BBC4A0918C:50000:SHA256",
                             TeamId = 2,
-                            UserName = "Maria"
+                            UserName = "Maria1"
                         });
                 });
 
@@ -678,29 +691,29 @@ namespace FinanceManager.Persistence.Migrations
                         {
                             UserId = 1,
                             RoleId = 2,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270)
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439)
                         },
                         new
                         {
                             UserId = 2,
                             RoleId = 1,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270)
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439)
                         },
                         new
                         {
                             UserId = 3,
                             RoleId = 1,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270)
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439)
                         },
                         new
                         {
                             UserId = 4,
                             RoleId = 2,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 11, DateTimeKind.Utc).AddTicks(6270)
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439)
                         });
                 });
 
@@ -750,10 +763,10 @@ namespace FinanceManager.Persistence.Migrations
                         {
                             Id = 1,
                             Amount = 250m,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
                             Description = "Описание 1",
-                            DoneAt = new DateTime(2024, 1, 12, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
+                            DoneAt = new DateTime(2024, 1, 13, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
                             UserFromId = 1,
                             UserToId = 2
                         },
@@ -761,10 +774,10 @@ namespace FinanceManager.Persistence.Migrations
                         {
                             Id = 2,
                             Amount = 500m,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
                             Description = "Описание 2",
-                            DoneAt = new DateTime(2024, 1, 7, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
+                            DoneAt = new DateTime(2024, 1, 8, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
                             UserFromId = 4,
                             UserToId = 3
                         },
@@ -772,10 +785,10 @@ namespace FinanceManager.Persistence.Migrations
                         {
                             Id = 3,
                             Amount = 700m,
-                            CreatedAt = new DateTime(2024, 1, 17, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
+                            CreatedAt = new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
                             Description = "Описание 3",
-                            DoneAt = new DateTime(2024, 1, 2, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
-                            ModifiedAt = new DateTime(2024, 1, 17, 8, 15, 26, 12, DateTimeKind.Utc).AddTicks(7912),
+                            DoneAt = new DateTime(2024, 1, 3, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
+                            ModifiedAt = new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757),
                             UserFromId = 4,
                             UserToId = 1
                         });
@@ -841,7 +854,7 @@ namespace FinanceManager.Persistence.Migrations
                     b.HasOne("FinanceManager.Domain.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Role");

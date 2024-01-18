@@ -27,7 +27,8 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
 
 		RuleFor(u => u.Gender)
 			.NotEmpty().WithMessage("{PropertyName} is required")
-			.Must(gender => gender == 'M' || gender == 'F').WithMessage("Gender must be 'M' or 'F'");
+			.MaximumLength(1).WithMessage("{PropertyName} must be {MaxLength} character long")
+			.Must(gender => gender == "M" || gender == "F").WithMessage("Gender must be 'M' or 'F'");
 
 		RuleFor(u => u.Email)
 			.NotEmpty().WithMessage("{PropertyName} is required")

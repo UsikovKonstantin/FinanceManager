@@ -28,7 +28,7 @@ namespace FinanceManager.Api.Controllers
 		[HttpGet()]
 		public async Task<IEnumerable<User>> Get()
 		{
-			string token = _tokenService.GenerateRefreshToken();
+			string token = _tokenService.GenerateRandomToken();
 
 			_logger.LogInformation("Logging something...");
 

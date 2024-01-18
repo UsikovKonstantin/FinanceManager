@@ -45,14 +45,30 @@ public class TokenService : ITokenService
 			issuer: _jwtSettings.Issuer,
 			audience: _jwtSettings.Audience,
 			claims: claims,
-			expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DurationInMinutes),
+			expires: DateTime.UtcNow.AddMinutes(_jwtSettings.AccessTokenDurationInMinutes),
 			signingCredentials: signinCredentials);
 
 		return token;
 	}
 
-	public string GenerateRefreshToken()
+	public string GenerateRandomToken()
 	{
 		return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+	}
+
+	public ClaimsPrincipal? GetPrincipalFromAccessToken(string token)
+	{
+		TokenValidationParameters validationParameters = new TokenValidationParameters
+		{
+			ValidateIssuer = true,
+			ValidateAudience = true,
+			ValidateIssuerSigningKey = true,
+			ValidateLifetime = false,
+			ValidIssuer = _jwtSettings.Issuer,
+			ValidAudience = _jwtSettings.Audience,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
+		};
+
+		return new JwtSecurityTokenHandler().ValidateToken(token, validationParameters, out _);
 	}
 }

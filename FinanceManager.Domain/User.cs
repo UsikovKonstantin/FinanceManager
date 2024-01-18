@@ -7,13 +7,21 @@ public class User : BaseEntity
 	public string FirstName { get; set; } = string.Empty;
 	public string LastName { get; set; } = string.Empty;
 	public double Balance { get; set; }
-	public char Gender { get; set; }
+	public string Gender { get; set; } = string.Empty;
 	public string Email { get; set; } = string.Empty;
-	public bool EmailConfirmed { get; set; }
-	public bool IsRegistered { get; set; }
 	public string Password { get; set; } = string.Empty;
-	public string? AccessToken { get; set; }
-	public DateTime? AccessTokenExpirationDate { get; set; }
+	public bool IsRegistered { get; set; }
+
+	public string? RegistrationToken { get; set; }
+	public DateTime? RegistrationTokenExpirationDate { get; set; }
+
+	public string? ResetPasswordToken { get; set; }
+	public DateTime? ResetPasswordTokenExpirationDate { get; set; }
+
+	public string? NewEmail { get; set; }
+	public string? ChangeEmailToken { get; set; }
+	public DateTime? ChangeEmailTokenExpirationDate { get; set; }
+
 	public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpirationDate { get; set; }
 

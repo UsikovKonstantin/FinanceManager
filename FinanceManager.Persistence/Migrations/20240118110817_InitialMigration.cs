@@ -71,13 +71,18 @@ namespace FinanceManager.Persistence.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Gender = table.Column<string>(type: "char(1)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    AccessToken = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    AccessTokenExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RefreshToken = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsRegistered = table.Column<bool>(type: "bit", nullable: false),
+                    RegistrationToken = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    RegistrationTokenExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ResetPasswordToken = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ResetPasswordTokenExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NewEmail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ChangeEmailToken = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ChangeEmailTokenExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RefreshToken = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     RefreshTokenExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -86,9 +91,9 @@ namespace FinanceManager.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.CheckConstraint("CK_User_Balance", "[Balance] >= 0 AND [Balance] < 100000000");
-                    table.CheckConstraint("CK_User_Email", "CHARINDEX('@', [Email]) > 0");
-                    table.CheckConstraint("CK_User_EmailFormat", "PATINDEX('%_@__%.__%', [Email]) > 0");
+                    table.CheckConstraint("CK_User_EmailFormat", "PATINDEX('%_@_%', [Email]) > 0");
                     table.CheckConstraint("CK_User_Gender", "[Gender] IN ('M', 'F')");
+                    table.CheckConstraint("CK_User_NewEmailFormat", "PATINDEX('%_@_%', [NewEmail]) > 0");
                     table.ForeignKey(
                         name: "FK_Users_Teams_TeamId",
                         column: x => x.TeamId,
@@ -181,7 +186,7 @@ namespace FinanceManager.Persistence.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -221,31 +226,31 @@ namespace FinanceManager.Persistence.Migrations
                 columns: new[] { "Id", "CreatedAt", "ModifiedAt", "Name", "Type" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Заработная плата", "I" },
-                    { 2, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Премия", "I" },
-                    { 3, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Пенсия", "I" },
-                    { 4, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Продуктовый магазин", "E" },
-                    { 5, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Хозтовары", "E" },
-                    { 6, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Подписка на музыкальный сервис", "E" },
-                    { 7, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Магазин электроники", "E" },
-                    { 8, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Магазин сантехники", "E" },
-                    { 9, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Кафе/Ресторан", "E" },
-                    { 10, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Услуги ЖКХ", "E" },
-                    { 11, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Бензин", "E" },
-                    { 12, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Общественный транспорт", "E" },
-                    { 13, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Такси", "E" },
-                    { 14, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Посещение врача", "E" },
-                    { 15, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Лекарства", "E" },
-                    { 16, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Одежда", "E" },
-                    { 17, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Учебное заведение", "E" },
-                    { 18, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Образование(книги/курсы/т.п.)", "E" },
-                    { 19, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Развлечение(кино/концерты/т.п.)", "E" },
-                    { 20, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Личные расходы", "E" },
-                    { 21, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Хобби", "E" },
-                    { 22, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Красота и уход за собой", "E" },
-                    { 23, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Проценты по кредитам", "E" },
-                    { 24, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Подарки", "B" },
-                    { 25, new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), new DateTime(2024, 1, 15, 6, 45, 29, 489, DateTimeKind.Utc).AddTicks(8038), "Другое", "B" }
+                    { 1, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Заработная плата", "I" },
+                    { 2, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Премия", "I" },
+                    { 3, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Пенсия", "I" },
+                    { 4, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Продуктовый магазин", "E" },
+                    { 5, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Хозтовары", "E" },
+                    { 6, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Подписка на музыкальный сервис", "E" },
+                    { 7, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Магазин электроники", "E" },
+                    { 8, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Магазин сантехники", "E" },
+                    { 9, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Кафе/Ресторан", "E" },
+                    { 10, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Услуги ЖКХ", "E" },
+                    { 11, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Бензин", "E" },
+                    { 12, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Общественный транспорт", "E" },
+                    { 13, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Такси", "E" },
+                    { 14, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Посещение врача", "E" },
+                    { 15, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Лекарства", "E" },
+                    { 16, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Одежда", "E" },
+                    { 17, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Учебное заведение", "E" },
+                    { 18, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Образование(книги/курсы/т.п.)", "E" },
+                    { 19, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Развлечение(кино/концерты/т.п.)", "E" },
+                    { 20, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Личные расходы", "E" },
+                    { 21, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Хобби", "E" },
+                    { 22, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Красота и уход за собой", "E" },
+                    { 23, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Проценты по кредитам", "E" },
+                    { 24, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Подарки", "B" },
+                    { 25, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(4980), "Другое", "B" }
                 });
 
             migrationBuilder.InsertData(
@@ -253,9 +258,9 @@ namespace FinanceManager.Persistence.Migrations
                 columns: new[] { "Id", "CreatedAt", "ModifiedAt", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(2567), new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(2567), "TeamMember" },
-                    { 2, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(2567), new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(2567), "TeamLeader" },
-                    { 3, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(2567), new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(2567), "Admin" }
+                    { 1, new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410), new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410), "TeamMember" },
+                    { 2, new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410), new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410), "TeamLeader" },
+                    { 3, new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410), new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(5410), "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -263,19 +268,19 @@ namespace FinanceManager.Persistence.Migrations
                 columns: new[] { "Id", "CreatedAt", "ModifiedAt", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(5281), new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(5281), "Группа 1" },
-                    { 2, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(5281), new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(5281), "Группа 2" }
+                    { 1, new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389), new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389), "Группа 1" },
+                    { 2, new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389), new DateTime(2024, 1, 18, 11, 8, 17, 136, DateTimeKind.Utc).AddTicks(8389), "Группа 2" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessToken", "AccessTokenExpirationDate", "Balance", "CreatedAt", "Email", "EmailConfirmed", "FirstName", "Gender", "LastName", "ModifiedAt", "Password", "RefreshToken", "RefreshTokenExpirationDate", "TeamId", "UserName" },
+                columns: new[] { "Id", "Balance", "ChangeEmailToken", "ChangeEmailTokenExpirationDate", "CreatedAt", "Email", "FirstName", "Gender", "IsRegistered", "LastName", "ModifiedAt", "NewEmail", "Password", "RefreshToken", "RefreshTokenExpirationDate", "RegistrationToken", "RegistrationTokenExpirationDate", "ResetPasswordToken", "ResetPasswordTokenExpirationDate", "TeamId", "UserName" },
                 values: new object[,]
                 {
-                    { 1, null, null, 10000m, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "usikov_konstantin@mail.ru", true, "Константин", "M", "Усиков", new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "03D1F6545E6426DDEC4797280867E2F14593E0FB38DD6BF190773139DCE58D92:E1C74E1AEB5D8308D160474C6E2C274E:50000:SHA256", null, null, 1, "Konstantin" },
-                    { 2, null, null, 20000m, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "orlov_dmitry@yandex.ru", true, "Дмитрий", "M", "Орлов", new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "41998DC78F605A001090203007F3F7341D46BE392229F82263C753B712BB57D5:2365F9A998AE23EBC65EAB8BAD005458:50000:SHA256", null, null, 1, "Dmitry" },
-                    { 3, null, null, 30000m, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "ivanov_artyom@gmail.com", true, "Артем", "M", "Иванов", new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "AC74B05E1B544764C0E33E0D4574A5E29C629AF5D22394B7308789DE59F054F3:9FD58EBE4CB968212D9F0117466A77CC:50000:SHA256", null, null, 1, "Artyom" },
-                    { 4, null, null, 40000m, new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "smirnova_maria@mail.ru", true, "Мария", "F", "Смирнова", new DateTime(2024, 1, 15, 6, 45, 29, 494, DateTimeKind.Utc).AddTicks(7320), "D9507B7FD5AF9880B37D6926354AB29CA7B313891BE5A3E9B851A4BF6E32BDCD:0E08FF50E2205404163CE192B957FA60:50000:SHA256", null, null, 2, "Maria" }
+                    { 1, 10000m, null, null, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), "usikov_konstantin@mail.ru", "Константин", "M", true, "Усиков", new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), null, "46BDA4F3691DF3493E8931985FB2073986231F597BD8D1841FFE919CA670EB06:D7A6746090E449C64C85B60FADAE5D2F:50000:SHA256", null, null, null, null, null, null, 1, "Konstantin1" },
+                    { 2, 20000m, null, null, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), "orlov_dmitry@yandex.ru", "Дмитрий", "M", true, "Орлов", new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), null, "F77753025D17913EE058E04AC3A62373A4F8564FCEE7C5DC4AD3F1A419238B4E:6641B1A3A8BADF1A30F307179A9A5C0A:50000:SHA256", null, null, null, null, null, null, 1, "Dmitry1" },
+                    { 3, 30000m, null, null, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), "ivanov_artyom@gmail.com", "Артем", "M", true, "Иванов", new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), null, "39E7BE9C0432F76FF7E239D3C8C9313270BF2CDC1D5EBDA0474C241F52387CC8:368AEC1394165D87754905CECD02A369:50000:SHA256", null, null, null, null, null, null, 1, "Artyom1" },
+                    { 4, 40000m, null, null, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), "smirnova_maria@mail.ru", "Мария", "F", true, "Смирнова", new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(552), null, "593652F3B10EE726A804C7B74C8C5A5A9E0C7F1E4E135BF1414E92CA5EE6EEFC:FE38DEBEE0E9CC245B5BE4BBC4A0918C:50000:SHA256", null, null, null, null, null, null, 2, "Maria1" }
                 });
 
             migrationBuilder.InsertData(
@@ -283,10 +288,10 @@ namespace FinanceManager.Persistence.Migrations
                 columns: new[] { "Id", "Amount", "CategoryId", "CreatedAt", "Description", "DoneAt", "ModifiedAt", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 10000m, 1, new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), "Описание 1", new DateTime(2024, 1, 10, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), 1 },
-                    { 2, 5000m, 2, new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), "Описание 2", new DateTime(2024, 1, 5, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), 1 },
-                    { 3, -1000m, 12, new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), "Описание 3", new DateTime(2023, 12, 31, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), 2 },
-                    { 4, -800m, 13, new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), "Описание 4", new DateTime(2023, 12, 26, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(1675), 4 }
+                    { 1, 10000m, 1, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), "Описание 1", new DateTime(2024, 1, 13, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), 1 },
+                    { 2, 5000m, 2, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), "Описание 2", new DateTime(2024, 1, 8, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), 1 },
+                    { 3, -1000m, 12, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), "Описание 3", new DateTime(2024, 1, 3, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), 2 },
+                    { 4, -800m, 13, new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), "Описание 4", new DateTime(2023, 12, 29, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), new DateTime(2024, 1, 18, 11, 8, 17, 131, DateTimeKind.Utc).AddTicks(8909), 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -294,9 +299,9 @@ namespace FinanceManager.Persistence.Migrations
                 columns: new[] { "Id", "CreatedAt", "ModifiedAt", "UserFromId", "UserToId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(7581), new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(7581), 4, 1 },
-                    { 2, new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(7581), new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(7581), 4, 2 },
-                    { 3, new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(7581), new DateTime(2024, 1, 15, 6, 45, 29, 490, DateTimeKind.Utc).AddTicks(7581), 1, 4 }
+                    { 1, new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952), new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952), 4, 1 },
+                    { 2, new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952), new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952), 4, 2 },
+                    { 3, new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952), new DateTime(2024, 1, 18, 11, 8, 17, 132, DateTimeKind.Utc).AddTicks(4952), 1, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -304,10 +309,10 @@ namespace FinanceManager.Persistence.Migrations
                 columns: new[] { "RoleId", "UserId", "CreatedAt", "ModifiedAt" },
                 values: new object[,]
                 {
-                    { 2, 1, new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944), new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944) },
-                    { 1, 2, new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944), new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944) },
-                    { 1, 3, new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944), new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944) },
-                    { 2, 4, new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944), new DateTime(2024, 1, 15, 6, 45, 29, 495, DateTimeKind.Utc).AddTicks(3944) }
+                    { 2, 1, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439), new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439) },
+                    { 1, 2, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439), new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439) },
+                    { 1, 3, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439), new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439) },
+                    { 2, 4, new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439), new DateTime(2024, 1, 18, 11, 8, 17, 137, DateTimeKind.Utc).AddTicks(7439) }
                 });
 
             migrationBuilder.InsertData(
@@ -315,9 +320,9 @@ namespace FinanceManager.Persistence.Migrations
                 columns: new[] { "Id", "Amount", "CreatedAt", "Description", "DoneAt", "ModifiedAt", "UserFromId", "UserToId" },
                 values: new object[,]
                 {
-                    { 1, 250m, new DateTime(2024, 1, 15, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), "Описание 1", new DateTime(2024, 1, 10, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), new DateTime(2024, 1, 15, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), 1, 2 },
-                    { 2, 500m, new DateTime(2024, 1, 15, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), "Описание 2", new DateTime(2024, 1, 5, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), new DateTime(2024, 1, 15, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), 4, 3 },
-                    { 3, 700m, new DateTime(2024, 1, 15, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), "Описание 3", new DateTime(2023, 12, 31, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), new DateTime(2024, 1, 15, 6, 45, 29, 496, DateTimeKind.Utc).AddTicks(3627), 4, 1 }
+                    { 1, 250m, new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), "Описание 1", new DateTime(2024, 1, 13, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), 1, 2 },
+                    { 2, 500m, new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), "Описание 2", new DateTime(2024, 1, 8, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), 4, 3 },
+                    { 3, 700m, new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), "Описание 3", new DateTime(2024, 1, 3, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), new DateTime(2024, 1, 18, 11, 8, 17, 138, DateTimeKind.Utc).AddTicks(7757), 4, 1 }
                 });
 
             migrationBuilder.CreateIndex(

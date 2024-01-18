@@ -5,10 +5,12 @@ using FinanceManager.Application.Contracts.Persistence;
 using FinanceManager.Application.Exceptions;
 using FinanceManager.Application.Features.Users.Shared;
 using FinanceManager.Application.Models.Email;
+using FinanceManager.Application.Models.Identity;
 using FinanceManager.Domain;
 using FluentValidation.Results;
 using MediatR;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Options;
+using System.Web;
 
 namespace FinanceManager.Application.Features.Users.Commands.RegisterUser;
 
@@ -19,22 +21,25 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, i
 	private readonly ITokenService _tokenService;
 	private readonly IEmailSender _emailSender;
 	private readonly IMapper _mapper;
+	private readonly JwtSettings _jwtSettings;
 
 	public RegisterUserCommandHandler(IUserRepository userRepository, IMapper mapper, 
-		ITeamRepository teamRepository, ITokenService tokenService, IEmailSender emailSender)
+		ITeamRepository teamRepository, ITokenService tokenService, IEmailSender emailSender,
+		IOptions<JwtSettings> jwtSettings)
 	{
 		_userRepository = userRepository;
 		_mapper = mapper;
 		_teamRepository = teamRepository;
 		_tokenService = tokenService;
 		_emailSender = emailSender;
+		_jwtSettings = jwtSettings.Value;
 	}
 
 	public async Task<int> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
 	{
 		// Если пользователь повторно запросил сообщение для регистрации
 		User? foundUser = await _userRepository.FirstOrDefaultAsync(u => u.Email == request.Email);
-		if (foundUser != null && !foundUser.IsRegistered && foundUser.AccessTokenExpirationDate < DateTime.UtcNow)
+		if (foundUser != null && !foundUser.IsRegistered && foundUser.RegistrationTokenExpirationDate < DateTime.UtcNow)
 		{
 			Team? foundTeam = await _teamRepository.GetByIdAsync(foundUser.TeamId);
 			await _userRepository.DeleteAsync(foundUser);
@@ -68,13 +73,12 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, i
 		await _userRepository.AddUserToRole(user.Id, "TeamLeader");
 
 		// Генерируем токен
-		JwtSecurityToken jwtSecurityToken = await _tokenService.GenerateAccessTokenAsync(user);
-		user.AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-		user.AccessTokenExpirationDate = jwtSecurityToken.ValidTo;
+		user.RegistrationToken = _tokenService.GenerateRandomToken();
+		user.RegistrationTokenExpirationDate = DateTime.UtcNow.AddMinutes(_jwtSettings.RegistrationTokenDurationInMinutes);
 		await _userRepository.UpdateAsync(user);
 
 		// Отправляем сообщение
-		string url = "https://localhost:5001/api/auth/confirmRegistration?token=" + user.AccessToken;
+		string url = "https://localhost:5001/api/auth/confirmRegistration?token=" + HttpUtility.UrlEncode(user.RegistrationToken);
 		await _emailSender.SendEmailAsync(new EmailMessage
 		{
 			ToMail = request.Email,

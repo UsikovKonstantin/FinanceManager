@@ -4,5 +4,5 @@ namespace FinanceManager.Application.Features.Users.Commands.ConfirmRegistration
 
 public class ConfirmRegistrationCommand : IRequest<Unit>
 {
-    public string Token { get; set; } = string.Empty;
+    public string RegistrationToken { get; set; } = string.Empty;
 }
