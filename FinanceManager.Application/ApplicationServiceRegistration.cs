@@ -21,6 +21,9 @@ public static class ApplicationServiceRegistration
 
 		services.AddTransient<ITokenService, TokenService>();
 
+		services.AddHttpContextAccessor();
+		services.AddTransient<IUserService, UserService>();
+
 		services.AddAuthentication(options =>
 		{
 			options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -1,10 +1,13 @@
-﻿using FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
+﻿using FinanceManager.Application.Features.Users.Commands.ChangeEmail;
+using FinanceManager.Application.Features.Users.Commands.ChangeEmailConfirm;
+using FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
 using FinanceManager.Application.Features.Users.Commands.ForgotPassword;
 using FinanceManager.Application.Features.Users.Commands.Login;
 using FinanceManager.Application.Features.Users.Commands.Refresh;
 using FinanceManager.Application.Features.Users.Commands.RegisterUser;
 using FinanceManager.Application.Features.Users.Commands.ResetPassword;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.Api.Controllers;
@@ -59,6 +62,22 @@ public class AuthController : Controller
 	[HttpPost("resetPassword")]
 	public async Task<ActionResult> ForgotPassword(ResetPasswordCommand command)
 	{
+		await _mediator.Send(command);
+		return NoContent();
+	}
+
+	[Authorize]
+	[HttpPost("changeEmail")]
+	public async Task<ActionResult> ChangeEmail(ChangeEmailCommand command)
+	{
+		await _mediator.Send(command);
+		return NoContent();
+	}
+
+	[HttpGet("changeEmailConfirm")]
+	public async Task<ActionResult> ChangeEmailConfirm(string token)
+	{
+		ChangeEmailConfirmCommand command = new ChangeEmailConfirmCommand { ChangeEmailToken = token };
 		await _mediator.Send(command);
 		return NoContent();
 	}

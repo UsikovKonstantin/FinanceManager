@@ -18,19 +18,22 @@ namespace FinanceManager.Api.Controllers
 		private readonly IAppLogger<TestController> _logger;
 		private readonly IEmailSender _emailSender;
 		private readonly ITokenService _tokenService;
+		private readonly IUserService _userService;
 
-		public TestController(IUserRepository userRepository, IAppLogger<TestController> logger, IEmailSender emailSender, ITokenService tokenService)
+		public TestController(IUserRepository userRepository, IAppLogger<TestController> logger, IEmailSender emailSender, ITokenService tokenService,
+			IUserService userService)
 		{
 			_userRepository = userRepository;
 			_logger = logger;
 			_emailSender = emailSender;
 			_tokenService = tokenService;
+			_userService = userService;
 		}
 
 		[HttpGet()]
 		public async Task<IEnumerable<User>> Get()
 		{
-			_logger.LogInformation(HttpContext?.User?.FindFirst("uid").Value.ToString());
+			_logger.LogInformation(_userService.UserId.ToString());
 
 			string token = _tokenService.GenerateRandomToken();
 
