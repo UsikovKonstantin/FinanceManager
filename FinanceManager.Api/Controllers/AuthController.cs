@@ -8,6 +8,7 @@ using FinanceManager.Application.Features.Users.Commands.Login;
 using FinanceManager.Application.Features.Users.Commands.Refresh;
 using FinanceManager.Application.Features.Users.Commands.RegisterUser;
 using FinanceManager.Application.Features.Users.Commands.ResetPassword;
+using FinanceManager.Application.Features.Users.Commands.UpdateUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -95,6 +96,14 @@ public class AuthController : Controller
 	[Authorize]
 	[HttpPost("changeUserName")]
 	public async Task<ActionResult> ChangeUserName(ChangeUserNameCommand command)
+	{
+		await _mediator.Send(command);
+		return NoContent();
+	}
+
+	[Authorize]
+	[HttpPost("updateUser")]
+	public async Task<ActionResult> UpdateUser(UpdateUserCommand command)
 	{
 		await _mediator.Send(command);
 		return NoContent();
