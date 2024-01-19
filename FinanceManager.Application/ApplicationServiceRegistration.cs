@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.Contracts.Identity;
-using FinanceManager.Application.Features.Users.Shared;
 using FinanceManager.Application.Models.Identity;
+using FinanceManager.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

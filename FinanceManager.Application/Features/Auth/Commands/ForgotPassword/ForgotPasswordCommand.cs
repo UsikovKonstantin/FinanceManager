@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace FinanceManager.Application.Features.Users.Commands.ForgotPassword;
+namespace FinanceManager.Application.Features.Auth.Commands.ForgotPassword;
 
 public class ForgotPasswordCommand : IRequest<Unit>
 {

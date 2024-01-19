@@ -1,13 +1,13 @@
-﻿using FinanceManager.Application.Features.Users.Commands.ChangeEmail;
+﻿using FinanceManager.Application.Features.Auth.Commands.ConfirmRegistration;
+using FinanceManager.Application.Features.Auth.Commands.ForgotPassword;
+using FinanceManager.Application.Features.Auth.Commands.Login;
+using FinanceManager.Application.Features.Auth.Commands.Refresh;
+using FinanceManager.Application.Features.Auth.Commands.Register;
+using FinanceManager.Application.Features.Auth.Commands.ResetPassword;
+using FinanceManager.Application.Features.Users.Commands.ChangeEmail;
 using FinanceManager.Application.Features.Users.Commands.ChangeEmailConfirm;
 using FinanceManager.Application.Features.Users.Commands.ChangePassword;
 using FinanceManager.Application.Features.Users.Commands.ChangeUserName;
-using FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
-using FinanceManager.Application.Features.Users.Commands.ForgotPassword;
-using FinanceManager.Application.Features.Users.Commands.Login;
-using FinanceManager.Application.Features.Users.Commands.Refresh;
-using FinanceManager.Application.Features.Users.Commands.RegisterUser;
-using FinanceManager.Application.Features.Users.Commands.ResetPassword;
 using FinanceManager.Application.Features.Users.Commands.UpdateUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -27,10 +27,10 @@ public class AuthController : Controller
 	}
 
 	[HttpPost("register")]
-	public async Task<ActionResult> Register(RegisterUserCommand command)
+	public async Task<ActionResult> Register(RegisterCommand command)
 	{
-		int id = await _mediator.Send(command);
-		return Ok(new { id = id });
+		await _mediator.Send(command);
+		return NoContent();
 	}
 
 	[HttpGet("confirmRegistration")]

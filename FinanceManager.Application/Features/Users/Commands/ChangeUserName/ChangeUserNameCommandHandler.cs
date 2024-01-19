@@ -1,7 +1,7 @@
 ﻿using FinanceManager.Application.Contracts.Identity;
 using FinanceManager.Application.Contracts.Persistence;
 using FinanceManager.Application.Exceptions;
-using FinanceManager.Application.Features.Users.Shared;
+using FinanceManager.Application.Features.Auth.Shared;
 using FinanceManager.Domain;
 using FluentValidation.Results;
 using MediatR;

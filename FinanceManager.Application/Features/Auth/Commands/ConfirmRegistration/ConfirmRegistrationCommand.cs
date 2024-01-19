@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
+namespace FinanceManager.Application.Features.Auth.Commands.ConfirmRegistration;
 
 public class ConfirmRegistrationCommand : IRequest<Unit>
 {
