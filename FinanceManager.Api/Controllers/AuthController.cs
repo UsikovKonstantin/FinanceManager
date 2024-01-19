@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Features.Users.Commands.ChangeEmail;
 using FinanceManager.Application.Features.Users.Commands.ChangeEmailConfirm;
+using FinanceManager.Application.Features.Users.Commands.ChangePassword;
 using FinanceManager.Application.Features.Users.Commands.ConfirmRegistration;
 using FinanceManager.Application.Features.Users.Commands.ForgotPassword;
 using FinanceManager.Application.Features.Users.Commands.Login;
@@ -78,6 +79,14 @@ public class AuthController : Controller
 	public async Task<ActionResult> ChangeEmailConfirm(string token)
 	{
 		ChangeEmailConfirmCommand command = new ChangeEmailConfirmCommand { ChangeEmailToken = token };
+		await _mediator.Send(command);
+		return NoContent();
+	}
+
+	[Authorize]
+	[HttpPost("changePassword")]
+	public async Task<ActionResult> ChangePassword(ChangePasswordCommand command)
+	{
 		await _mediator.Send(command);
 		return NoContent();
 	}

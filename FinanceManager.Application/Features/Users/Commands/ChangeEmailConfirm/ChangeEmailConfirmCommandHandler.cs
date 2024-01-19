@@ -5,11 +5,11 @@ using MediatR;
 
 namespace FinanceManager.Application.Features.Users.Commands.ChangeEmailConfirm;
 
-public class ChangeEmailConfirmHandler : IRequestHandler<ChangeEmailConfirmCommand, Unit>
+public class ChangeEmailConfirmCommandHandler : IRequestHandler<ChangeEmailConfirmCommand, Unit>
 {
 	private readonly IUserRepository _userRepository;
 
-	public ChangeEmailConfirmHandler(IUserRepository userRepository)
+	public ChangeEmailConfirmCommandHandler(IUserRepository userRepository)
 	{
 		_userRepository = userRepository;
 	}
