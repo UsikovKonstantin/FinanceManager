@@ -20,15 +20,18 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
 
 	public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
 	{
+		// Проверить данные
 		UpdateUserCommandValidator validator = new UpdateUserCommandValidator();
 		ValidationResult validationResult = await validator.ValidateAsync(request, cancellationToken);
 		if (!validationResult.IsValid)
-			throw new BadRequestException("Invalid UpdateUserRequest", validationResult);
+			throw new BadRequestException("Invalid UpdateUserCommand", validationResult);
 
+		// Найти пользователя, который вызвал запрос
 		User? user = await _userRepository.GetByIdAsync(_userService.UserId);
 		if (user == null)
 			throw new NotFoundException(nameof(User), _userService.UserId);
 
+		// Обновить данные
 		user.FirstName = request.FirstName ?? user.FirstName;
 		user.LastName = request.LastName ?? user.LastName;
 		user.Gender = request.Gender ?? user.Gender;

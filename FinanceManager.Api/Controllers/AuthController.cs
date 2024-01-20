@@ -69,43 +69,22 @@ public class AuthController : Controller
 		return NoContent();
 	}
 
-	[Authorize]
-	[HttpPost("changeEmail")]
-	public async Task<ActionResult> ChangeEmail(ChangeEmailCommand command)
-	{
-		await _mediator.Send(command);
-		return NoContent();
-	}
 
-	[HttpGet("changeEmailConfirm")]
-	public async Task<ActionResult> ChangeEmailConfirm(string token)
-	{
-		ChangeEmailConfirmCommand command = new ChangeEmailConfirmCommand { ChangeEmailToken = token };
-		await _mediator.Send(command);
-		return NoContent();
-	}
 
-	[Authorize]
-	[HttpPost("changePassword")]
-	public async Task<ActionResult> ChangePassword(ChangePasswordCommand command)
-	{
-		await _mediator.Send(command);
-		return NoContent();
-	}
 
-	[Authorize]
-	[HttpPost("changeUserName")]
-	public async Task<ActionResult> ChangeUserName(ChangeUserNameCommand command)
-	{
-		await _mediator.Send(command);
-		return NoContent();
-	}
 
-	[Authorize]
-	[HttpPost("updateUser")]
-	public async Task<ActionResult> UpdateUser(UpdateUserCommand command)
-	{
-		await _mediator.Send(command);
-		return NoContent();
-	}
+
+
+
+
+
+	
+
+	
+
+	
+
+	
+
+	
 }

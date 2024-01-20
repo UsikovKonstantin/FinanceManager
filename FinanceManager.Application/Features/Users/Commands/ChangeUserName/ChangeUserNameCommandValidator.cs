@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Contracts.Identity;
 using FinanceManager.Application.Contracts.Persistence;
+using FinanceManager.Application.Features.Auth.Shared;
 using FinanceManager.Domain;
 using FluentValidation;
 
@@ -15,8 +16,9 @@ public class ChangeUserNameCommandValidator : AbstractValidator<ChangeUserNameCo
 		_userService = userService;
 		_userRepository = userRepository;
 
-		RuleFor(p => p.CurrentPassword)
-			.NotEmpty().WithMessage("{PropertyName} is required");
+		RuleFor(p => p.Password)
+			.NotEmpty().WithMessage("{PropertyName} is required")
+			.MustAsync(PasswordCorrect).WithMessage("Incorrect password");
 
 		RuleFor(u => u.NewUserName)
 			.NotEmpty().WithMessage("{PropertyName} is required")
@@ -35,5 +37,11 @@ public class ChangeUserNameCommandValidator : AbstractValidator<ChangeUserNameCo
 	{
 		User? user = await _userRepository.FirstOrDefaultAsync(u => u.UserName == userName);
 		return user == null || user.Id == _userService.UserId;
+	}
+
+	private async Task<bool> PasswordCorrect(string password, CancellationToken token)
+	{
+		User? user = await _userRepository.GetByIdAsync(_userService.UserId);
+		return user == null || SecretHasher.Verify(password, user.Password);
 	}
 }

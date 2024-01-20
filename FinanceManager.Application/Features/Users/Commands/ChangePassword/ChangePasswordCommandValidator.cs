@@ -1,13 +1,24 @@
-﻿using FluentValidation;
+﻿using FinanceManager.Application.Contracts.Identity;
+using FinanceManager.Application.Contracts.Persistence;
+using FinanceManager.Application.Features.Auth.Shared;
+using FinanceManager.Domain;
+using FluentValidation;
 
 namespace FinanceManager.Application.Features.Users.Commands.ChangePassword;
 
 public class ChangePasswordCommandValidator : AbstractValidator<ChangePasswordCommand>
 {
-    public ChangePasswordCommandValidator()
+	private readonly IUserRepository _userRepository;
+	private readonly IUserService _userService;
+
+    public ChangePasswordCommandValidator(IUserRepository userRepository, IUserService userService)
     {
+		_userRepository = userRepository;
+		_userService = userService;
+
 		RuleFor(p => p.CurrentPassword)
-			.NotEmpty().WithMessage("{PropertyName} is required");
+			.NotEmpty().WithMessage("{PropertyName} is required")
+			.MustAsync(PasswordCorrect).WithMessage("Incorrect password");
 
 		RuleFor(p => p.NewPassword)
 			.NotEmpty().WithMessage("{PropertyName} is required")
@@ -23,5 +34,11 @@ public class ChangePasswordCommandValidator : AbstractValidator<ChangePasswordCo
 		RuleFor(p => p)
 			.Must(p => p.NewPassword == p.ConfirmNewPassword).WithMessage("NewPassword must equal to ConfirmNewPassword")
 			.Must(p => p.CurrentPassword != p.NewPassword).WithMessage("NewPassword must be new");
+	}
+
+	private async Task<bool> PasswordCorrect(string password, CancellationToken token)
+	{
+		User? user = await _userRepository.GetByIdAsync(_userService.UserId);
+		return user == null || SecretHasher.Verify(password, user.Password);
 	}
 }
