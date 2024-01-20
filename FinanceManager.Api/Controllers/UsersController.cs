@@ -3,7 +3,7 @@ using FinanceManager.Application.Features.Users.Commands.ChangeEmailConfirm;
 using FinanceManager.Application.Features.Users.Commands.ChangePassword;
 using FinanceManager.Application.Features.Users.Commands.ChangeUserName;
 using FinanceManager.Application.Features.Users.Commands.UpdateUser;
-using FinanceManager.Application.Features.Users.Queries.GetCurrentUser;
+using FinanceManager.Application.Features.Users.Queries.GetMe;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +25,7 @@ public class UsersController : Controller
 	[HttpGet("me")]
 	public async Task<ActionResult> GetCurrentUser()
 	{
-		UserResponse user = await _mediator.Send(new GetCurrentUserQuery());
+		CurrentUserResponse user = await _mediator.Send(new GetCurrentUserQuery());
 		return Ok(user);
 	}
 

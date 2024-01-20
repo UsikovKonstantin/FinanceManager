@@ -14,7 +14,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 1,
 				Name = "Заработная плата",
-				Type = 'I',
+				Type = "I",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -22,7 +22,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 2,
 				Name = "Премия",
-				Type = 'I',
+				Type = "I",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -30,7 +30,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 3,
 				Name = "Пенсия",
-				Type = 'I',
+				Type = "I",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -38,7 +38,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 4,
 				Name = "Продуктовый магазин",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -46,7 +46,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 5,
 				Name = "Хозтовары",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -54,7 +54,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 6,
 				Name = "Подписка на музыкальный сервис",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -62,7 +62,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 7,
 				Name = "Магазин электроники",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -70,7 +70,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 8,
 				Name = "Магазин сантехники",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -78,7 +78,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 9,
 				Name = "Кафе/Ресторан",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -86,7 +86,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 10,
 				Name = "Услуги ЖКХ",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -94,7 +94,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 11,
 				Name = "Бензин",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -102,7 +102,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 12,
 				Name = "Общественный транспорт",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -110,7 +110,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 13,
 				Name = "Такси",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -118,7 +118,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 14,
 				Name = "Посещение врача",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -126,7 +126,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 15,
 				Name = "Лекарства",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -134,7 +134,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 16,
 				Name = "Одежда",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -142,7 +142,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 17,
 				Name = "Учебное заведение",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -150,7 +150,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 18,
 				Name = "Образование(книги/курсы/т.п.)",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -158,7 +158,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 19,
 				Name = "Развлечение(кино/концерты/т.п.)",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -166,7 +166,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 20,
 				Name = "Личные расходы",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -174,7 +174,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 21,
 				Name = "Хобби",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -182,7 +182,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 22,
 				Name = "Красота и уход за собой",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -190,7 +190,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 23,
 				Name = "Проценты по кредитам",
-				Type = 'E',
+				Type = "E",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -198,7 +198,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 24,
 				Name = "Подарки",
-				Type = 'B',
+				Type = "B",
 				CreatedAt = now,
 				ModifiedAt = now
 			},
@@ -206,7 +206,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 			{
 				Id = 25,
 				Name = "Другое",
-				Type = 'B',
+				Type = "B",
 				CreatedAt = now,
 				ModifiedAt = now
 			}
@@ -229,7 +229,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
 		builder.Property(c => c.Type)
 			.IsRequired()
-			.HasColumnType("char(1)");
+			.HasMaxLength(1);
 		builder.ToTable(table => table.HasCheckConstraint("CK_Category_Type", "[Type] IN ('I', 'E', 'B')"));
 	}
 }

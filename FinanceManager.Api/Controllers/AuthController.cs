@@ -4,13 +4,7 @@ using FinanceManager.Application.Features.Auth.Commands.Login;
 using FinanceManager.Application.Features.Auth.Commands.Refresh;
 using FinanceManager.Application.Features.Auth.Commands.Register;
 using FinanceManager.Application.Features.Auth.Commands.ResetPassword;
-using FinanceManager.Application.Features.Users.Commands.ChangeEmail;
-using FinanceManager.Application.Features.Users.Commands.ChangeEmailConfirm;
-using FinanceManager.Application.Features.Users.Commands.ChangePassword;
-using FinanceManager.Application.Features.Users.Commands.ChangeUserName;
-using FinanceManager.Application.Features.Users.Commands.UpdateUser;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.Api.Controllers;
@@ -68,23 +62,4 @@ public class AuthController : Controller
 		await _mediator.Send(command);
 		return NoContent();
 	}
-
-
-
-
-
-
-
-
-
-
-	
-
-	
-
-	
-
-	
-
-	
 }
