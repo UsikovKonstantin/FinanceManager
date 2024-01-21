@@ -34,6 +34,7 @@ public class TeamsController : Controller
 		return Ok(team);
 	}
 
+	[Authorize]
 	[HttpPut("my")]
 	public async Task<ActionResult> ChangeMyTeamName(ChangeMyTeamNameCommand command)
 	{
