@@ -65,7 +65,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Unit>
         await _userRepository.CreateAsync(user);
 
         // Добавить роль пользователю
-        await _userRepository.AddUserToRole(user.Id, "TeamLeader");
+        await _userRepository.AddUserToRoleAsync(user.Id, "TeamLeader");
 
         // Генерируем токен для подтверждения регистрации
         user.RegistrationToken = _tokenService.GenerateRandomToken();

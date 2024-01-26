@@ -1,4 +1,6 @@
-﻿using FinanceManager.Application.Features.Invitations.Commands.CreateInvitation;
+﻿using FinanceManager.Application.Features.Invitations.Commands.AcceptInvitation;
+using FinanceManager.Application.Features.Invitations.Commands.CreateInvitation;
+using FinanceManager.Application.Features.Invitations.Commands.DeclineInvitation;
 using FinanceManager.Application.Features.Invitations.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -31,5 +33,21 @@ public class InvitationsController : Controller
 	{
 		int id = await _mediator.Send(command);
 		return Ok(new { id = id });
+	}
+
+	[Authorize]
+	[HttpPost("{id}/decline")]
+	public async Task<ActionResult> DeclineInvatation(int id)
+	{
+		await _mediator.Send(new DeclineInvitationCommand { Id = id });
+		return NoContent();
+	}
+
+	[Authorize]
+	[HttpPost("{id}/accept")]
+	public async Task<ActionResult> AcceptInvatation(int id)
+	{
+		await _mediator.Send(new AcceptInvitationCommand { Id = id });
+		return NoContent();
 	}
 }

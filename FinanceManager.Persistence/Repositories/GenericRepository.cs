@@ -42,15 +42,34 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 		await _context.SaveChangesAsync();
 	}
 
+	public async Task CreateRangeAsync(params T[] entities)
+	{
+		await _context.AddRangeAsync(entities);
+		await _context.SaveChangesAsync();
+	}
+
 	public async Task UpdateAsync(T entity)
 	{
 		_context.Entry(entity).State = EntityState.Modified;
 		await _context.SaveChangesAsync();
 	}
 
+	public async Task UpdateRangeAsync(params T[] entities)
+	{
+		foreach (T entity in entities)
+			_context.Entry(entity).State = EntityState.Modified;
+		await _context.SaveChangesAsync();
+	}
+
 	public async Task DeleteAsync(T entity)
 	{
 		_context.Remove(entity);
+		await _context.SaveChangesAsync();
+	}
+
+	public async Task DeleteRangeAsync(params T[] entities)
+	{
+		_context.RemoveRange(entities);
 		await _context.SaveChangesAsync();
 	}
 }

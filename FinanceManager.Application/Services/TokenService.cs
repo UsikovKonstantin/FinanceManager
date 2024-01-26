@@ -14,17 +14,17 @@ namespace FinanceManager.Application.Services;
 public class TokenService : ITokenService
 {
     private readonly JwtSettings _jwtSettings;
-    private readonly IRoleRepository _roleRepository;
+    private readonly IUserRepository _userRepository;
 
-    public TokenService(IOptions<JwtSettings> jwtSettings, IRoleRepository roleRepository)
+    public TokenService(IOptions<JwtSettings> jwtSettings, IUserRepository userRepository)
     {
         _jwtSettings = jwtSettings.Value;
-        _roleRepository = roleRepository;
+		_userRepository = userRepository;
     }
 
     public async Task<JwtSecurityToken> GenerateAccessTokenAsync(User user)
     {
-        IEnumerable<string> roles = await _roleRepository.GetRolesByUserIdAsync(user.Id);
+        IEnumerable<string> roles = await _userRepository.GetRolesByUserIdAsync(user.Id);
 
         IEnumerable<Claim> roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r));
 

@@ -34,17 +34,19 @@ namespace FinanceManager.Api.Controllers
 		public async Task<IEnumerable<User>> Get()
 		{
 			_logger.LogInformation(_userService.UserId.ToString());
+			_logger.LogInformation((await _userRepository.IsUserInRoleAsync(_userService.UserId, "TeamMember")).ToString());
+			_logger.LogInformation((await _userRepository.IsUserInRoleAsync(_userService.UserId, "TeamLeader")).ToString());
 
 			string token = _tokenService.GenerateRandomToken();
 
 			_logger.LogInformation("Logging something...");
 
-			await _emailSender.SendEmailAsync(new EmailMessage
-			{
-				ToMail = "usikov-kostya@mail.ru",
-				Subject = "Тема",
-				Message = "Сообщение"
-			});
+			//await _emailSender.SendEmailAsync(new EmailMessage
+			//{
+			//	ToMail = "usikov-kostya@mail.ru",
+			//	Subject = "Тема",
+			//	Message = "Сообщение"
+			//});
 
 			return await _userRepository.GetAllAsync();
 		}
