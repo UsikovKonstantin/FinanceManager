@@ -21,9 +21,9 @@ public class CategoriesController : Controller
 
 	[Authorize]
 	[HttpGet]
-	public async Task<ActionResult> GetCategories(bool income, bool expenses)
+	public async Task<ActionResult> GetCategories(string? type)
 	{
-		IEnumerable<CategoryResponse> categories =  await _mediator.Send(new GetCategoriesQuery { Income = income, Expenses = expenses });
+		IEnumerable<CategoryResponse> categories =  await _mediator.Send(new GetCategoriesQuery { Type = type });
 		return Ok(categories);
 	}
 

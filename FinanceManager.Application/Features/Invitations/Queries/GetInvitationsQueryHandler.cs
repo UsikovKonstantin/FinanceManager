@@ -21,8 +21,11 @@ public class GetInvitationsQueryHandler : IRequestHandler<GetInvitationsQuery, I
 
 	public async Task<IEnumerable<InvitationResponse>> Handle(GetInvitationsQuery request, CancellationToken cancellationToken)
 	{
+		bool fromMeNeeded = request.Type == null || request.Type.ToLower() == "fromme";
+		bool toMeNeeded = request.Type == null || request.Type.ToLower() == "tome";
+
 		IEnumerable<Invitation> invitations = await _invitationRepository.GetWhereAsync(
-			i => (request.FromMe && i.UserFromId == _userService.UserId) || (request.ToMe && i.UserToId == _userService.UserId));
+			i => (fromMeNeeded && i.UserFromId == _userService.UserId) || (toMeNeeded && i.UserToId == _userService.UserId));
 
 		IEnumerable<InvitationResponse> invitationResponses = _mapper.Map<IEnumerable<InvitationResponse>>(invitations);
 

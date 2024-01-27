@@ -21,9 +21,9 @@ public class InvitationsController : Controller
 
 	[Authorize]
 	[HttpGet]
-	public async Task<ActionResult> GetInvitations(bool fromMe, bool toMe)
+	public async Task<ActionResult> GetInvitations(string? type)
 	{
-		IEnumerable<InvitationResponse> invitations = await _mediator.Send(new GetInvitationsQuery { FromMe = fromMe, ToMe = toMe });
+		IEnumerable<InvitationResponse> invitations = await _mediator.Send(new GetInvitationsQuery { Type = type });
 		return Ok(invitations);
 	}
 

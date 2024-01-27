@@ -19,8 +19,11 @@ public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, IEn
 
     public async Task<IEnumerable<CategoryResponse>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
 	{
-        IEnumerable<Category> categories = await _categoryRepository.GetWhereAsync(
-            c => (request.Income && (c.Type == "I" || c.Type == "B")) || (request.Expenses && (c.Type == "E" || c.Type == "B")));
+        bool incomeNeeded = request.Type == null || request.Type.ToLower() == "income";
+		bool expensesNeeded = request.Type == null || request.Type.ToLower() == "expenses";
+
+		IEnumerable<Category> categories = await _categoryRepository.GetWhereAsync(
+            c => (incomeNeeded && (c.Type == "I" || c.Type == "B")) || (expensesNeeded && (c.Type == "E" || c.Type == "B")));
 
 		IEnumerable<CategoryResponse> categoryResponses = _mapper.Map<IEnumerable<CategoryResponse>>(categories);
 
