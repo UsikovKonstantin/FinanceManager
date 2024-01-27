@@ -2,6 +2,9 @@
 using FinanceManager.Application.Features.Users.Commands.ChangeEmailConfirm;
 using FinanceManager.Application.Features.Users.Commands.ChangePassword;
 using FinanceManager.Application.Features.Users.Commands.ChangeUserName;
+using FinanceManager.Application.Features.Users.Commands.GiveLeader;
+using FinanceManager.Application.Features.Users.Commands.KickUser;
+using FinanceManager.Application.Features.Users.Commands.LeaveTeam;
 using FinanceManager.Application.Features.Users.Commands.UpdateUser;
 using FinanceManager.Application.Features.Users.Queries.GetMe;
 using MediatR;
@@ -66,6 +69,30 @@ public class UsersController : Controller
 	public async Task<ActionResult> UpdateUser(UpdateUserCommand command)
 	{
 		await _mediator.Send(command);
+		return NoContent();
+	}
+
+	[Authorize]
+	[HttpPost("me/leave")]
+	public async Task<ActionResult> LeaveTeam()
+	{
+		await _mediator.Send(new LeaveTeamCommand());
+		return NoContent();
+	}
+
+	[Authorize]
+	[HttpPost("{id}/giveLeader")]
+	public async Task<ActionResult> GiveLeader(int id)
+	{
+		await _mediator.Send(new GiveLeaderCommand { Id = id });
+		return NoContent();
+	}
+
+	[Authorize]
+	[HttpPost("{id}/kick")]
+	public async Task<ActionResult> Kick(int id)
+	{
+		await _mediator.Send(new KickUserCommand { Id = id });
 		return NoContent();
 	}
 }
