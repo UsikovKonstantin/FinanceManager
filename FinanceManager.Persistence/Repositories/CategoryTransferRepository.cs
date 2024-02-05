@@ -41,14 +41,10 @@ public class CategoryTransferRepository : GenericRepository<CategoryTransfer>, I
 				((incomeNeeded && ct.Amount > 0) || (expensesNeeded && ct.Amount < 0)) &&
 				(!startDateNeeded || ct.DoneAt >= startDate) &&
 				(!endDateNeeded || ct.DoneAt <= endDate) &&
-				(!categoryIdNeeded || ct.CategoryId == categoryId))
-			.Skip((page - 1) * pageSize)
-			.Take(pageSize);
+				(!categoryIdNeeded || ct.CategoryId == categoryId));
 
 		// Выполнить сортировку
-		if (sortColumn == null)
-			return await categoryTransfersQuery.ToListAsync();
-
+		sortColumn = sortColumn ?? "id";
 		Expression<Func<CategoryTransfer, object?>> keySelector;
 		switch (sortColumn.ToLower())
 		{
@@ -74,15 +70,15 @@ public class CategoryTransferRepository : GenericRepository<CategoryTransfer>, I
 				throw new BadRequestException("Unknown sort column: " + sortColumn.ToLower());
 		}
 
-		IEnumerable<CategoryTransfer> categoryTransfers;
 		sortOrder = sortOrder ?? "asc";
 		if (sortOrder.ToLower() == "asc")
-			categoryTransfers = await categoryTransfersQuery.OrderBy(keySelector).ToListAsync();
+			categoryTransfersQuery = categoryTransfersQuery.OrderBy(keySelector);
 		else if (sortOrder.ToLower() == "desc")
-			categoryTransfers = await categoryTransfersQuery.OrderByDescending(keySelector).ToListAsync();
+			categoryTransfersQuery = categoryTransfersQuery.OrderByDescending(keySelector);
 		else
 			throw new BadRequestException("Unknown sort order: " + sortColumn.ToLower());
 
+		IEnumerable<CategoryTransfer> categoryTransfers = await categoryTransfersQuery.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 		return categoryTransfersQuery;
 	}
 }
