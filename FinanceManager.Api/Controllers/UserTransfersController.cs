@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Features.UserTransfers.Commands.CreateUserTransfer;
+using FinanceManager.Application.Features.UserTransfers.Commands.DeleteUserTransfer;
 using FinanceManager.Application.Features.UserTransfers.Queries.GetUserTransfer;
 using FinanceManager.Application.Features.UserTransfers.Queries.GetUserTransfers;
 using FinanceManager.Application.Features.UserTransfers.Queries.Shared;
@@ -53,5 +54,13 @@ public class UserTransfersController : Controller
 	{
 		int id = await _mediator.Send(command);
 		return Ok(new { id = id });
+	}
+
+	[Authorize]
+	[HttpDelete("{id}")]
+	public async Task<ActionResult> DeleteUserTransfer(int id)
+	{
+		await _mediator.Send(new DeleteUserTransferCommand { Id = id });
+		return NoContent();
 	}
 }
